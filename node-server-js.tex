@@ -162,40 +162,163 @@
 
 		Example (Suite):
 		\begin{verbatim}
-			var bunyan   = require('bunyan');     // module from package.json
-			var http     = require('http');       // builtin module
-			var wgServer = require('./wgServer'); // Home made, application specific, module
+			// module from package.json
+			var bunyan = require('bunyan');
+
+			// builtin module
+			var http = require('http');
+
+			// Home made, application specific, module
+			var wgServer = require('./wgServer');
 		\end{verbatim}
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Server side Javascript}
 		\framesubtitle{Web modules: http \& Express}
-		%More content goes here
+		\begin{enumerate}
+			\item Modules are needed to use node as a webserver
+			\item Express uses http
+		\end{enumerate}
 	\end{frame}
-	\begin{frame}
+
+	\begin{frame}[fragile]
 		\frametitle{Server side Javascript}
 		\framesubtitle{Web module: http}
-		%More content goes here
+
+		Basic HTTP calls, convenient for simple or specific applications.
+		\begin{verbatim}
+		var http = require('http');
+		http.createServer(function (req, res) {
+		    res.writeHead(200, {'Content-Type': 'text/plain'});
+		    res.end('Hello World\n');
+		}).listen(1337, '127.0.0.1');
+		console.log('Server running at http://127.0.0.1:1337/');
+		\end{verbatim}
 	\end{frame}
+
 	\begin{frame}
 		\frametitle{Server side Javascript}
 		\framesubtitle{Web module: Express}
-		%More content goes here
+
+		Layer above http, handle file serving, http methods, sessions... \\
+		Can generate a whole web project structure with routes managements ,
+		needed folders...
 	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Server side Javascript}
+		\framesubtitle{Web module: Express}
+
+		\begin{verbatim}
+		var app = require('express')();
+
+		app.get('/library/:file', function (req, res) {
+		    // static file serving
+		    res.sendFile(
+		        req.params.file,
+		        {
+		            root: __dirname + '/library/',
+		            headers: {
+		                'content-type': 'application/javascript'
+		            }
+		        }
+		    );
+		});
+		\end{verbatim}
+	\end{frame}
+
 	\begin{frame}
 		\frametitle{Server side Javascript}
 		\framesubtitle{Custom modules in Node.js}
-		%More content goes here
+
+		As seen previously, it is also possible (thanksfully!) to create our own
+		modules.
 	\end{frame}
-	\begin{frame}
+
+	\begin{frame}[fragile]
 		\frametitle{Server side Javascript}
 		\framesubtitle{Custom modules in Node.js - Basic structure and Exports}
-		%More content goes here
+
+		keystone of a module: modules.exports, this must contain the public
+		elements of a module.
+		\begin{verbatim}
+		// module definition, in [project root]/path/to/myModule.js
+		var myModule = {
+		    answer: 42,
+		    sum: function(a, b) {
+		        return a + b;
+		    }
+		};
+
+		module.exports = myModule;
+		\end{verbatim}
 	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Server side Javascript}
+		\framesubtitle{Custom modules in Node.js - Basic structure and Exports}
+
+		keystone of a module: modules.exports, this must contain the public
+		elements of a module.
+		\begin{verbatim}
+		// usage in my application, named for example app.js
+		var myNewModule = require('./path/to/myModule');
+
+		console.log(myNewModule.answer, myNewModule.sum(1, 2));
+
+		// run it
+		> node app.js
+		42 3
+		\end{verbatim}
+	\end{frame}
+
 	\begin{frame}
 		\frametitle{Server side Javascript}
 		\framesubtitle{Custom modules in Node.js - Private methods and attributes}
-		%More content goes here
+
+		A private method/variable just has to not be included in the exports.\\
+		The scope of the file is nonetheless not global, so top level variables
+		will stay in the module.
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Server side Javascript}
+		\framesubtitle{Custom modules in Node.js - Private methods and attributes}
+
+		\begin{verbatim}
+		// module definition, in [project root]/path/to/myModule.js
+		function multiply(a, b) {
+		    return a * b;
+		}
+
+		var myModule = {
+		    sum: function(a, b) {
+		        return a + b;
+		    }
+		};
+
+		module.exports = myModule;
+		\end{verbatim}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Server side Javascript}
+		\framesubtitle{Custom modules in Node.js - Private methods and attributes}
+
+		\begin{verbatim}
+		// usage in my application, named for example app.js
+		var myNewModule = require('./path/to/myModule');
+
+		console.log(myNewModule.multiply(1, 2));
+
+		// run it
+		> node app.js
+
+		/tmp/app.js:3
+		console.log(myNewModule.answer, myNewModule.multiply(1, 2));
+		                                            ^
+		TypeError: Object #<Object> has no method 'multiply'
+		\end{verbatim}
 	\end{frame}
 \end{document}
