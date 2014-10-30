@@ -35,27 +35,73 @@
 	\begin{frame}
 		\frametitle{Server side Javascript}
 		\framesubtitle{Introduction to Node.js}
+		\begin{enumerate}
+			\item Platform built on Chrome's Javascript engine (V8)
+			\item Event-driven and Asynchronous coding
+			\item Uses native Javascript
+			\item Uses modules to build applications
+		\end{enumerate}
 	\end{frame}
 
 	\begin{frame}[fragile]
 		\frametitle{Server side Javascript}
 		\framesubtitle{Introduction to Node.js - Command line javascript vs Server side javascript}
+
+		PHP Command line:
+		\begin{verbatim}
+		> php -a
+		Interactive mode enabled
+
+		php > print("hello world");
+		hello world
+		\end{verbatim}
+
+		Node Command line:
+		\begin{verbatim}
+		> node
+		> console.log("Hello world");
+		Hello world
+		undefined
+		\end{verbatim}
 	\end{frame}
 
 
 	\begin{frame}
 		\frametitle{Server side Javascript}
 		\framesubtitle{Dependancies}
+		\begin{enumerate}
+			\item package.json \\
+				Description of the project.
+			\item Modules \\
+				To structure the application's code and use third party modules.
+		\end{enumerate}
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Server side Javascript}
 		\framesubtitle{Dependancies - Modules}
+
+		\begin{enumerate}
+			\item Third party modules are in a node\_modules folder.
+			\item User modules can be anywhere and called with relative paths.
+		\end{enumerate}
 	\end{frame}
 
 	\begin{frame}[fragile]
 		\frametitle{Server side Javascript}
 		\framesubtitle{Dependancies - Modules}
+		Example
+		\begin{verbatim}
+			{
+				"name": "My Project",
+				"description": "This is an amazing project",
+				"author": "John Doe <john@doe.com>",
+				"dependencies": {
+					"express": ">= 1.2.0",
+					"socket.io": "1.x"
+				}
+			}
+		\end{verbatim}
 	\end{frame}
 
 	\begin{frame}
