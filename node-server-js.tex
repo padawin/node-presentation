@@ -79,11 +79,12 @@
 
 	\begin{frame}
 		\frametitle{Server side Javascript}
-		\framesubtitle{Dependancies - Modules}
+		\framesubtitle{Dependancies - package.json}
 
 		\begin{enumerate}
-			\item Third party modules are in a node\_modules folder.
-			\item User modules can be anywhere and called with relative paths.
+			\item Description file of the project (name, description, owner
+				email...)
+			\item Can contain dependancies with third party libraries
 		\end{enumerate}
 	\end{frame}
 
@@ -106,30 +107,95 @@
 
 	\begin{frame}
 		\frametitle{Server side Javascript}
-		\framesubtitle{Dependancies - package.json}
+		\framesubtitle{Dependancies - Modules}
+
+		\begin{enumerate}
+			\item Third party modules (defined in package.json) are in a
+				node\_modules folder.
+			\item User modules can be anywhere and called with relative paths.
+		\end{enumerate}
 	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Server side Javascript}
+		\framesubtitle{Dependancies - Modules}
+
+		Example:
+		\begin{verbatim}
+			{
+			    "name": "websockets-springboard",
+			    "version": "0.0.1",
+			    "description": "spring board websocket gateway",
+			    "dependencies": {
+			        "bunyan": "~1.2.0",
+			        "express": "~4.9.7",
+			        "lodash": "^2.4.1",
+			        "rabbit.js": "~0.4.1",
+			        "socket.io": "~1.1.0"
+			    }
+			}
+		\end{verbatim}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Server side Javascript}
+		\framesubtitle{Dependancies - Modules}
+
+		Example (Suite):
+		\begin{verbatim}
+			server/websockets/nodejs/
+			|---- node_modules
+			|   |---- bunyan
+			|   |---- express
+			|   |---- lodash
+			|   |---- rabbit.js
+			|   |---- socket.io
+			|---- package.json
+			|---- websocket.js
+			|---- wgServer.js
+		\end{verbatim}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Server side Javascript}
+		\framesubtitle{Dependancies - Modules}
+
+		Example (Suite):
+		\begin{verbatim}
+			var bunyan   = require('bunyan');     // module from package.json
+			var http     = require('http');       // builtin module
+			var wgServer = require('./wgServer'); // Home made, application specific, module
+		\end{verbatim}
+	\end{frame}
+
 	\begin{frame}
 		\frametitle{Server side Javascript}
 		\framesubtitle{Web modules: http \& Express}
+		%More content goes here
 	\end{frame}
 	\begin{frame}
 		\frametitle{Server side Javascript}
 		\framesubtitle{Web module: http}
+		%More content goes here
 	\end{frame}
 	\begin{frame}
 		\frametitle{Server side Javascript}
 		\framesubtitle{Web module: Express}
+		%More content goes here
 	\end{frame}
 	\begin{frame}
 		\frametitle{Server side Javascript}
 		\framesubtitle{Custom modules in Node.js}
+		%More content goes here
 	\end{frame}
 	\begin{frame}
 		\frametitle{Server side Javascript}
 		\framesubtitle{Custom modules in Node.js - Basic structure and Exports}
+		%More content goes here
 	\end{frame}
 	\begin{frame}
 		\frametitle{Server side Javascript}
 		\framesubtitle{Custom modules in Node.js - Private methods and attributes}
+		%More content goes here
 	\end{frame}
 \end{document}
